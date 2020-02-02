@@ -1,10 +1,14 @@
 import React from "react";
 
-function Numpad() {
+function Numpad(props) {
 
     function handleClick(event) {
         const name = event.target.name;
-        console.log(name);
+        if (name === "AC" || name === "+/-" || name === "%" || name === ",") {
+            props.handleFunction(name);
+        } else {
+            props.handleNumber(name);
+        }
     }
 
     return (

@@ -20,18 +20,14 @@ function App() {
         '/' : (a,b) => (a / b)
     };
 
-    function calculate() {
-
-    }
-
-    function handleFunction(event) {
-        const name = event.target.name;
-        if (name === "AC") {
+    function handleFunction(fun) {
+        // const fun = event.target.name;
+        if (fun === "AC") {
             setOutput(0); 
             setNumber(0);
             setOperator("");
             setResult(0);
-        } else if (name === "+/-") {
+        } else if (fun === "+/-") {
             if (number > 0) {
                 setNumber((prevNumber) => {
                     const number = -abs(prevNumber);
@@ -45,7 +41,7 @@ function App() {
                     return number;
                 });
             }   
-        } else if (name === "%") {
+        } else if (fun === "%") {
             if (operator != "") {
                 setNumber((prevNumber) => {
                     const number = result*prevNumber/100;
@@ -59,13 +55,13 @@ function App() {
                     return number;
                 })
             }
-        } else if (name === ",") {
+        } else if (fun === ",") {
             //TODO: later
         }
     }
 
-    function handleNumber(event) {
-        const currentNumber = event.target.name;
+    function handleNumber(currentNumber) {
+        // const currentNumber = event.target.name;
         setNumber((prevNumber) => {
             let newNumber = 0;
             if (prevNumber >= 0) {
@@ -78,8 +74,7 @@ function App() {
         });
     }
 
-    function handleOperation(event) {
-        const operation = event.target.name;
+    function handleOperation(operation) {
         if (operator != "") {       // если нужно поменять только оператор, то ничего другого трогать не надо
             setOperator(operation);
         } else {
@@ -105,29 +100,14 @@ function App() {
                     <h2 className="heading">CALCULATOR</h2>
                     <div className="output-area">{output}</div>
                 </div>
-                <div className="numpad">
-                    <button onClick={handleFunction} className="button btn-grey" name="AC">AC</button>
-                    <button onClick={handleFunction} className="button btn-grey" name="+/-">+/−</button>
-                    <button onClick={handleFunction} className="button btn-grey" name="%">%</button>
-                    <button onClick={handleNumber} className="button btn-black" name="7">7</button>
-                    <button onClick={handleNumber} className="button btn-black" name="8">8</button>
-                    <button onClick={handleNumber} className="button btn-black" name="9">9</button>
-                    <button onClick={handleNumber} className="button btn-black" name="4">4</button>
-                    <button onClick={handleNumber} className="button btn-black" name="5">5</button>
-                    <button onClick={handleNumber} className="button btn-black" name="6">6</button>
-                    <button onClick={handleNumber} className="button btn-black" name="1">1</button>
-                    <button onClick={handleNumber} className="button btn-black" name="2">2</button>
-                    <button onClick={handleNumber} className="button btn-black" name="3">3</button>
-                    <button onClick={handleNumber} className="button btn-black btn-zero" name="0">0</button>
-                    <button onClick={handleFunction} className="button btn-black" name=",">,</button>
-                </div>
-                <div className="operators">
-                    <button onClick={handleOperation} className="button btn-orange" name="/">÷</button>
-                    <button onClick={handleOperation} className="button btn-orange" name="*">⨯</button>
-                    <button onClick={handleOperation} className="button btn-orange" name="-">−</button>
-                    <button onClick={handleOperation} className="button btn-orange" name="+">+</button>
-                    <button onClick={handleResult} className="button btn-orange" name="=">=</button>
-                </div>
+                <Numpad 
+                    handleNumber = {handleNumber}
+                    handleFunction = {handleFunction}    
+                />
+                <Operators
+                    handleOperation = {handleOperation}
+                    handleResult = {handleResult}
+                />
             </div>
         </div>
     );

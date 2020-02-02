@@ -7,6 +7,7 @@
   
   body {
     background-color: black;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
   }
   
   .container {
@@ -16,6 +17,7 @@
     margin-top: 2%;
     min-width: 440px;
     min-height: 665px;
+    background-color: black;
   }
   
   /* DISPLAY OUTPUT BEGIN */
